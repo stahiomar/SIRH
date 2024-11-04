@@ -1,0 +1,48 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sirh-app
+      name: usersservice
+  template:
+    metadata:
+      labels:
+        app: sirh-app
+        name: usersservice
+    spec:
+      containers:
+        - name: users-service
+          image: omarstahii/users-service:0.2
+          ports:
+            - containerPort: 8081
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mariadb://mariadb:3306/mydb?createDatabaseIfNotExist=true
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: rootpassword
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: usersservice-service
+  labels:
+    name: usersservice-service
+    app: sirh-app
+spec:
+  selector:
+    app: sirh-app
+    name: usersservice
+  ports:
+    - port: 8081
+      targetPort: 8081
+  type: ClusterIP
+

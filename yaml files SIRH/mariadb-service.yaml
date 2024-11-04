@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb-service
+  labels:
+    app: sirh-app
+spec:
+  selector:
+    app: sirh-app  # It selects the Pod based on the app label
+  ports:
+    - protocol: TCP
+      port: 3307         # Exposed service port
+      targetPort: 3306   # Port on the MariaDB container
+  type: ClusterIP        # Default service type (only accessible within the cluster)

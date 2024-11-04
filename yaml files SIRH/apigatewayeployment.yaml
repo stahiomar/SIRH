@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apigateway-deployment
+  labels:
+    app: sirh-app
+    name: apigateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sirh-app
+      name: apigateway
+  template:
+    metadata:
+      labels:
+        app: sirh-app
+        name: apigateway
+    spec:
+      containers:
+      - name: apigateway
+        image: omarstahii/api-gateway:0.8
+        ports:
+        - containerPort: 9000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apigateway-service
+  labels:
+    name: apigateway-service
+    app: sirh-app
+spec:
+  selector:
+    app: sirh-app
+    name: apigateway
+  ports:
+    - port: 9000
+      targetPort: 9000
+      nodePort: 30001  # Specify a port for external access (optional)
+  type: NodePort
+
+

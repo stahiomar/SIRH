@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb
+  labels:
+    app: mariadb
+spec:
+  ports:
+    - port: 3306   # Default MariaDB port
+      targetPort: 3306
+  clusterIP: None   # Allows for direct communication within the cluster (useful for StatefulSets)
+  selector:
+    app: mariadb

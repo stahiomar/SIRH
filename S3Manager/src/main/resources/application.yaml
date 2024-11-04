@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: S3Manager
+
+server:
+  port: 8082
+
+config:
+  aws:
+    region: us-east-1
+    s3:
+      url: http://192.168.49.2:30003
+      bucket-name: bulletins
+      access-key: test
+      secret-key: test
+

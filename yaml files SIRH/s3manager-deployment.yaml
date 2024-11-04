@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: s3manager-deployment
+  labels:
+    app: sirh-app
+    name: s3manager
+spec:
+  replicas: 1 # Adjust as needed
+  selector:
+    matchLabels:
+      app: sirh-app
+      name: s3manager
+  template:
+    metadata:
+      labels:
+        app: sirh-app
+        name: s3manager
+    spec:
+      containers:
+      - name: s3manager
+        image: omarstahii/s3manager:0.4 # Ensure image availability
+        ports:
+        - containerPort: 8082 # Ensure the container listens on this port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: s3manager-service # Service name matches deployment/app naming convention
+  labels:
+    app: sirh-app
+    name: s3manager-service # Ensure consistent naming
+spec:
+  selector:
+    app: sirh-app
+    name: s3manager # Ensure selector matches the pod labels
+  ports:
+    - port: 8082
+      targetPort: 8082 # Adjust if the container uses a different internal port
+  type: ClusterIP
+

@@ -33,3 +33,9 @@ This project provides an integrated HR management system covering essential HR f
 
 ## Project architecture
 ![image](https://github.com/user-attachments/assets/bae0c638-7fbb-496f-8354-c56acc0ff65a)
+
+##🛠️ Usage
+- **User Management**: Manage employee data, roles, and permissions.
+- **Leave Management**: Employees can submit leave requests, which managers or HR can approve.
+- **HR Processes**: Access additional workflows for HR functions.
+- **File Storage**: Use Amazon S3 for storing and accessing pay slips.
